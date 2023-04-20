@@ -11,8 +11,8 @@ export default function App() {
   return (
     <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name = "List" component={List}/>
-                <Stack.Screen name = "Add" component = {Add}/>
+                <Stack.Screen name = "Rubrica" component={List}/>
+                <Stack.Screen name = "Aggiungi" component = {Add}/>
             </Stack.Navigator>
         </NavigationContainer>
   );

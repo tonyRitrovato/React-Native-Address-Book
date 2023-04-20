@@ -1,12 +1,18 @@
-import { StyleSheet, Text, TextInput, View, Button} from 'react-native';
+import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
+import { Button } from '@rneui/themed';
 
 //Prima view: ricerca e aggiunta
 
-export default function List() {
+export default function List({navigation}) {
+        
+    const navigateAdd = () => {
+        navigation.navigate('Aggiungi');
+    }
+
     return( 
-        <View>
+        <ScrollView style = {styles.globalView}>
             {/* view ricerca e aggiunta*/}
-            <View>
+            <View style = {styles.searchGlobalView}>
                 <View style = {styles.search}>
                     <TextInput
                      style = {styles.searchInput}
@@ -15,53 +21,105 @@ export default function List() {
                 </View>
                 <View style = {styles.add}>
                     <Button
-                        title = "+"
-                        onPress={() => {}}
-                        style = {styles.addButton}
+                        title = ""
+                        onPress={navigateAdd}
+                        color = '#000'
+                        type = "clear"
+                        icon={{
+                            name: 'add',
+                            size: 30,
+                            color: 'black',
+                          }}
                     />
                 </View>
             </View>
-            {/*altro view da definire con calma*/}
-            <View></View>
-        </View>
+            {/*Secondo view*/}
+            <View style = {styles.addressBookGlobalView}>
+                <View style = {styles.addressView}>
+                    {/*scritta contatti*/}
+                    <View style = {styles.contactTextView}>
+                        <Text>Prova</Text>
+                    </View>
+                    {/*component view */}
+                    <View style = {styles.componentView}>
+                        <Text>Prova</Text>
+                        <Text>prova2</Text>
+                    </View>
+                </View>
+                {/*lista delle lettere per muoversi velocemente all' interno della rubbrica */}
+                <View style = {styles.letterIndexView}></View>
+            </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
 
     globalView: {
-
+        flexDirection: 'column'
     },
 
     searchGlobalView: {
         width: '100%',
       height: '100%',
-      marginBottom: 5,
-      padding: 5,
-      alignItems: 'center',
-      flexDirection: 'row'
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'white',
+      alignItems: 'center'
     },
 
-    search: {
-
+    addressBookGlobalView: {
+      width: '100%',
+      height: '100%',
+      flex: 8,
+      flexDirection: 'row',
+      backgroundColor: 'black',
+      alignItems: 'center'
     },
 
-    searchInput: {
-        backgroundColor: 'white',
-        borderRadius: 200,
-        padding: '3%',
-        borderWidth: 1,
+    addressView: {
+        
+        flex: 5.5,
+        flexDirection: 'column',
+    },
+
+    contactTextView: {
+        width: '100%',
+      height: '100%',
+        backgroundColor: 'yellow',
+        flex: 2,
+    },
+
+    letterIndexView: {
+        width: '100%',
+      height: '100%',
+        backgroundColor: 'green',
+        flex: 1,
+    },
+
+    componentView: {
+        width: '100%',
+      height: '100%',
+        backgroundColor: 'blue',
         flex: 4,
     },
 
-    add: {
-
+    search: {
+        backgroundColor: 'white',
+        flex: 5.5,
+        padding: 5,
+        marginLeft: 15,
     },
 
-    addButton: {
-        backgroundColor: 'white',
-        borderRadius: '100%',
-        padding: '5%',
+    searchInput: {
+        backgroundColor: '#eee',
+        borderRadius: 200,
+        padding: 5,
+    
+    },
+
+    add: {
         flex: 1,
+        backgroundColor: 'white',
     },
 });

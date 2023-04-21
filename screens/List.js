@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
 import { Button } from '@rneui/themed';
-
-//Prima view: ricerca e aggiunta
+import LetterIndex from '../components/LetterIndex';
 
 export default function List({navigation}) {
         
@@ -38,16 +37,17 @@ export default function List({navigation}) {
                 <View style = {styles.addressView}>
                     {/*scritta contatti*/}
                     <View style = {styles.contactTextView}>
-                        <Text>Prova</Text>
+                        <Text>Contatti</Text>
                     </View>
                     {/*component view */}
                     <View style = {styles.componentView}>
-                        <Text>Prova</Text>
-                        <Text>prova2</Text>
+
                     </View>
                 </View>
                 {/*lista delle lettere per muoversi velocemente all' interno della rubbrica */}
-                <View style = {styles.letterIndexView}></View>
+                <View style = {styles.letterIndexView}>
+                    <LetterIndex/>
+                </View>
             </View>
         </ScrollView>
     );
@@ -56,7 +56,9 @@ export default function List({navigation}) {
 const styles = StyleSheet.create({
 
     globalView: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
     },
 
     searchGlobalView: {
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
       height: '100%',
       flex: 8,
       flexDirection: 'row',
-      backgroundColor: 'black',
+      backgroundColor: 'white',
       alignItems: 'center'
     },
 
@@ -86,22 +88,21 @@ const styles = StyleSheet.create({
     contactTextView: {
         width: '100%',
       height: '100%',
-        backgroundColor: 'yellow',
-        flex: 2,
+        backgroundColor: 'white',
+        flex: 1,
     },
 
     letterIndexView: {
         width: '100%',
-      height: '100%',
-        backgroundColor: 'green',
+        height: '100%',
         flex: 1,
     },
 
     componentView: {
         width: '100%',
       height: '100%',
-        backgroundColor: 'blue',
-        flex: 4,
+        backgroundColor: 'white',
+        flex: 8,
     },
 
     search: {

@@ -14,6 +14,7 @@ export default class LetterIndex extends Component {
                     <View style = {styles.buttonView}>
                         <Button
                             title = {letters}
+                            
                             onPress = {() => {}}
                             titleStyle = {styles.textStyle}
                             type = "clear"

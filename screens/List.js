@@ -41,7 +41,6 @@ export default function List({navigation}) {
                     </View>
                     {/*component view */}
                     <View style = {styles.componentView}>
-                          <Text style = {styles.contactStyle}>Prova</Text>
                     </View>
                 </ScrollView>
                 {/*lista delle lettere per muoversi velocemente all' interno della rubbrica */}

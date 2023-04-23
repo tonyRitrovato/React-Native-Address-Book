@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     buttonView: {
         flex: 1,
         width: '70%',
-        height: '100%',
+        height: 7,
         marginLeft: '20%',
         justifyContent: 'center',
         alignItems: 'center'

@@ -2,19 +2,21 @@ import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
 import {Component} from 'react';
 import { Button } from '@rneui/themed';
 
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'X', 'Y', 'Z'];
+const letters = [];
+for(let i = 65; i <= 90; i++)
+    letters.push(String.fromCharCode(i));
 
 
 export default class LetterIndex extends Component {
 
     render(){
         return(
-                letters.map((letters) =>{
+                letters.map((letters, index) =>{
                 return(
                     <View style = {styles.buttonView}>
                         <Button
                             title = {letters}
-                            
+                            key = {index}
                             onPress = {() => {}}
                             titleStyle = {styles.textStyle}
                             type = "clear"

@@ -1,12 +1,22 @@
 import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
 import { Button } from '@rneui/themed';
 import LetterIndex from '../components/LetterIndex';
+import  AddressBookitem  from '../components/AddressBookItem';
+import AddressLetter from '../components/AddressLetter';
+import {Singleton} from '../utils/Singleton'
 
 export default function List({navigation}) {
         
     const navigateAdd = () => {
         navigation.navigate('Aggiungi');
     }
+
+    let s = new Singleton();
+    let prova = [];
+    /* prova.push(new AddressBookitem("antonio", "ritrovato", "tratturo", 11, 12))
+    prova.push(new AddressBookitem("francesco", "antini", "tratturo", 11, 12)) */
+    s.setAddressList(prova);
+    
 
     return( 
         <View style = {styles.globalView}>
@@ -41,6 +51,7 @@ export default function List({navigation}) {
                     </View>
                     {/*component view */}
                     <View style = {styles.componentView}>
+                        <AddressLetter/>
                     </View>
                 </ScrollView>
                 {/*lista delle lettere per muoversi velocemente all' interno della rubbrica */}
@@ -111,7 +122,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold', 
         marginLeft: 20,
-        marginTop: '3%'
+        marginTop: '3%',
+        marginBottom: 15,
     },
 
     search: {

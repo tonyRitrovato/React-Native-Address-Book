@@ -28,8 +28,13 @@ export default class AddressLetter extends Component {
 
     render() {
        /*  this.file.delete(); */
+       if(this.s.isSearching === true && this.s.getSearch() !== '') {
+        result = this.state.addresses.filter(obj => obj.name === this.s.getSearch() | obj.surname === this.s.getSearch())
+       }
+        else
+            result = this.state.addresses;
         return (
-            this.state.addresses.map(address => {
+            result.map(address => {
                 return (
                     <TouchableHighlight onPress={() => { Alert.alert("prova!") }}>
                         <View style={styles.globalView}>

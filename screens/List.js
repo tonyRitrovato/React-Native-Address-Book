@@ -6,16 +6,18 @@ import AddressLetter from '../components/AddressLetter';
 import {Singleton} from '../utils/Singleton'
 
 export default function List({navigation}) {
-
-    const [search, setSearch] = useState("");
         
     const navigateAdd = () => {
         navigation.navigate('Aggiungi');
     }
 
     let s = new Singleton();
-    let prova = [];
-    s.setAddressList(prova);
+
+    const handleResearch = (text) => {
+        s.setIsSearching(true);
+        s.setSearch(text);
+        s.getAddressRender().update();
+    }
     
 
     return( 
@@ -26,7 +28,7 @@ export default function List({navigation}) {
                     <TextInput
                      style = {styles.searchInput}
                      placeholder='Cerca'
-                     onChangeText={setSearch}
+                     onChangeText={handleResearch}
                      />
                 </View>
                 <View style = {styles.add}>

@@ -11,12 +11,12 @@ export default class LetterIndex extends Component {
 
     render(){
         return(
-                letters.map((letters, index) =>{
+                letters.map((letters) =>{
                 return(
                     <View style = {styles.buttonView}>
                         <Button
                             title = {letters}
-                            key = {index}
+                            key = {letters}
                             onPress = {() => {}}
                             titleStyle = {styles.textStyle}
                             type = "clear"

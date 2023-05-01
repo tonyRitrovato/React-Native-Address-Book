@@ -1,26 +1,39 @@
-import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
+import { StyleSheet, ScrollView, TextInput, KeyBoard, View, Alert} from 'react-native';
 import { Button } from '@rneui/themed';
 import DatePicker from 'react-native-modern-datepicker';
-import {Singleton} from '../utils/Singleton'
+import {Singleton} from '../utils/Singleton';
+import {FileHandler} from '../utils/FileHandler';
 import AddressBookitem from '../components/AddressBookItem';
 import { useState } from 'react';
 
 export default function Add() {
 
     let s = new Singleton();
+    let file = new FileHandler();
 
     const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [address, setAddress] = useState('');
+    const [number, setNumber] = useState('');
+    const [date, setDate] = useState('');
 
     return(
-        <View style = {styles.globalView}>
+        <ScrollView style = {styles.globalView}>
             <View style = {styles.header}>
                 <Button
                     title = {"aggiungi ai contatti"}
                     onPress = {() => {
-                        console.log(name);
                         let addresses = s.getAddressList();
-                        addresses.push(new AddressBookitem(name, "ritrovato", "tratturo", 11, 12));
-                        s.setAddressList(addresses);
+                        console.log(addresses);
+                        if(name == '' | surname == '' | address == '' | number == ''| date == '') 
+                            Alert.alert("completa tutti i campi!");
+                        else {
+                            addresses.push(new AddressBookitem(name, surname, address, number, date));
+                            Alert.alert("contatto aggiunto con successo!");
+                        }
+                        file.save(s.getAddressList()).then(() => console.log("salvataggio avvenuto con successo")).catch((err) => console.log(err));
+                        const update = s.getAddressRender();
+                        update.update();
                     }}
                     titleStyle = {styles.textStyle}
                     type = "clear"
@@ -30,15 +43,12 @@ export default function Add() {
             </View>
             <View style = {styles.form}>
                 <TextInput onChangeText={setName} style = {styles.formInput} placeholder='Nome'/>
-                <TextInput style = {styles.formInput} placeholder='Cognome'/>
-                <TextInput style = {styles.formInput} placeholder='Indirizzo'/>
-                <TextInput style = {styles.formInput} keyboardType='numeric' placeholder='Numero Telefonico'/>
-                <DatePicker 
-                    style = {styles.dateInput}
-                    
-                />
+                <TextInput onChangeText={setSurname} style = {styles.formInput} placeholder='Cognome'/>
+                <TextInput onChangeText={setAddress} style = {styles.formInput} placeholder='Indirizzo'/>
+                <TextInput onChangeText={setNumber} style = {styles.formInput} keyboardType='numeric' placeholder='Numero Telefonico'/>
+                <DatePicker onSelectedChange = {setDate} style = {styles.dateInput}/>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -65,11 +75,11 @@ const styles = StyleSheet.create({
     },
 
     dateInput: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         borderRadius: 20,
-        padding: 5,
+        padding: 1,
         width: '100%',
-        height: '100%',
+        height: 50,
     },
 
     formInput: {

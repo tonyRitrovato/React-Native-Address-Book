@@ -1,29 +1,46 @@
-import { StyleSheet, Text, TextInput, ScrollView, View, TouchableHighlight, Alert} from 'react-native';
-import {Component} from 'react';
-import AddressBookitem from './AddressBookItem';
+import { StyleSheet, Text, View, TouchableHighlight, Alert} from 'react-native';
+import {Component } from 'react';
 import {Singleton} from '../utils/Singleton';
-
+import {FileHandler} from '../utils/FileHandler';
 
 
 export default class AddressLetter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            addresses: []
+        };
+        this.file = new FileHandler();
+        this.s = new Singleton();
+        this.s.setAddressRender(this);
+    }
 
-    render(){
+    update() {
+        this.setState({addresses: this.s.getAddressList()})
+        this.forceUpdate();
+    }
 
-        let s = new Singleton();
-        let addresses = s.getAddressList();
+    async componentDidMount() {
+            const data = await this.file.upload().then((data) => this.s.setAddressList(data));
+            const updatedAddresses = this.s.getAddressList().sort((a, b) => a.surname.localeCompare(b.surname));
+            this.setState({ addresses: updatedAddresses });
+        }
 
-        return(
-            addresses.map(address => {
-                return(
-                    <TouchableHighlight onPress={() => {Alert.alert("prova!")}}>
-                        <View style = {this.styles.globalView}>
-                            <Text style = {this.styles.text}>{address.name} {address.surname}</Text>
+    render() {
+       /*  this.file.delete(); */
+        return (
+            this.state.addresses.map(address => {
+                return (
+                    <TouchableHighlight onPress={() => { Alert.alert("prova!") }}>
+                        <View style={styles.globalView}>
+                            <Text style={styles.text}>{address.name} {address.surname}</Text>
                         </View>
                     </TouchableHighlight>
                 );
             })
         );
     }
+}
 
     styles = StyleSheet.create({
         globalView: {
@@ -42,5 +59,5 @@ export default class AddressLetter extends Component {
             fontWeight: 'bold', 
         },
     })
-}
+
 

@@ -1,5 +1,4 @@
-import { StyleSheet, Text, TextInput, ScrollView, View, TouchableHighlight} from 'react-native';
-import {Component} from 'react';
+
 
 export default class AddressBookitem {
     

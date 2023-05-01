@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
 import { Button } from '@rneui/themed';
+import {useState} from 'react';
 import LetterIndex from '../components/LetterIndex';
-import  AddressBookitem  from '../components/AddressBookItem';
 import AddressLetter from '../components/AddressLetter';
 import {Singleton} from '../utils/Singleton'
 
 export default function List({navigation}) {
+
+    const [search, setSearch] = useState("");
         
     const navigateAdd = () => {
         navigation.navigate('Aggiungi');
@@ -13,8 +15,6 @@ export default function List({navigation}) {
 
     let s = new Singleton();
     let prova = [];
-    /* prova.push(new AddressBookitem("antonio", "ritrovato", "tratturo", 11, 12))
-    prova.push(new AddressBookitem("francesco", "antini", "tratturo", 11, 12)) */
     s.setAddressList(prova);
     
 
@@ -26,6 +26,7 @@ export default function List({navigation}) {
                     <TextInput
                      style = {styles.searchInput}
                      placeholder='Cerca'
+                     onChangeText={setSearch}
                      />
                 </View>
                 <View style = {styles.add}>

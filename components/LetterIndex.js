@@ -13,10 +13,9 @@ export default class LetterIndex extends Component {
         return(
                 letters.map((letters) =>{
                 return(
-                    <View style = {styles.buttonView}>
+                    <View key ={letters} style = {styles.buttonView}>
                         <Button
                             title = {letters}
-                            key = {letters}
                             onPress = {() => {}}
                             titleStyle = {styles.textStyle}
                             type = "clear"

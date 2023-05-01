@@ -21,13 +21,18 @@ export default class AddressLetter extends Component {
     }
 
     async componentDidMount() {
-            const data = await this.file.upload().then((data) => this.s.setAddressList(data));
-            const updatedAddresses = this.s.getAddressList().sort((a, b) => a.surname.localeCompare(b.surname));
-            this.setState({ addresses: updatedAddresses });
+            await this.file.upload()
+            .then((data) => {
+                this.s.setAddressList(data);
+                const updatedAddresses = this.s.getAddressList().sort((a, b) => a.surname.localeCompare(b.surname));
+                this.setState({ addresses: updatedAddresses });
+            })
+            .catch(err => console.log(err));
+           
         }
 
     render() {
-       /*  this.file.delete(); */
+        /* this.file.delete(); */
        if(this.s.isSearching === true && this.s.getSearch() !== '') {
         result = this.state.addresses.filter(obj => obj.name === this.s.getSearch() | obj.surname === this.s.getSearch())
        }
@@ -36,7 +41,7 @@ export default class AddressLetter extends Component {
         return (
             result.map(address => {
                 return (
-                    <TouchableHighlight onPress={() => { Alert.alert("prova!") }}>
+                    <TouchableHighlight key= {address.id} onPress={() => { Alert.alert("prova!") }}>
                         <View style={styles.globalView}>
                             <Text style={styles.text}>{address.name} {address.surname}</Text>
                         </View>

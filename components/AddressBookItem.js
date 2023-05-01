@@ -2,7 +2,8 @@
 
 export default class AddressBookitem {
     
-    constructor(name, surname, address, number, date) {
+    constructor(id ,name, surname, address, number, date) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.address = address;

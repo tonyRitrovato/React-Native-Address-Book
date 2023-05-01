@@ -33,9 +33,6 @@ export class FileHandler {
      }
 
      async delete() {
-         /* const empty = [];
-         const content = JSON.stringify(empty);
-         await FS.writeAsStringAsync(this.fileUri, content); */
          await FS.deleteAsync(this.fileUri);
      }
 }

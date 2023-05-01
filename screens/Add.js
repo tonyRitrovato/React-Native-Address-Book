@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, TextInput, KeyBoard, View, Alert} from 'react-native';
+import { StyleSheet, ScrollView, TextInput, View, Alert} from 'react-native';
 import { Button } from '@rneui/themed';
 import DatePicker from 'react-native-modern-datepicker';
 import {Singleton} from '../utils/Singleton';
@@ -17,6 +17,25 @@ export default function Add() {
     const [number, setNumber] = useState('');
     const [date, setDate] = useState('');
 
+    const idGeneration = () => {
+        let id = "";
+        let max = 9;
+        let min = 0;
+        do
+            for(let i = 0; i < 10; i++)
+                id += Math.floor(Math.random() * (max - min + 1)) + min;
+        while(idCheck(id));
+        return id;
+    }
+
+    const idCheck = (id) => {
+        s.getAddressList().forEach(element => {
+            if(element.id === id)
+                return true;
+            return false;
+        });
+    }
+
     return(
         <ScrollView style = {styles.globalView}>
             <View style = {styles.header}>
@@ -24,11 +43,10 @@ export default function Add() {
                     title = {"aggiungi ai contatti"}
                     onPress = {() => {
                         let addresses = s.getAddressList();
-                        console.log(addresses);
                         if(name == '' | surname == '' | address == '' | number == ''| date == '') 
                             Alert.alert("completa tutti i campi!");
                         else {
-                            addresses.push(new AddressBookitem(name, surname, address, number, date));
+                            addresses.push(new AddressBookitem(idGeneration(),name, surname, address, number, date));
                             Alert.alert("contatto aggiunto con successo!");
                         }
                         file.save(s.getAddressList()).then(() => console.log("salvataggio avvenuto con successo")).catch((err) => console.log(err));

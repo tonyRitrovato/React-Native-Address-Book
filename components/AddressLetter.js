@@ -34,10 +34,8 @@ export default class AddressLetter extends Component {
 
     render() {
         /* this.file.delete(); */
-        const { navigation } = this.props;
-       if(this.s.isSearching === true && this.s.getSearch() !== '') {
-        result = this.state.addresses.filter(obj => obj.name === this.s.getSearch() | obj.surname === this.s.getSearch())
-       }
+       if(this.s.isSearching === true && this.s.getSearch() !== '') 
+            result = this.state.addresses.filter(obj => obj.name.includes(this.s.getSearch()) | obj.surname.includes(this.s.getSearch()));
         else
             result = this.state.addresses;
         return (

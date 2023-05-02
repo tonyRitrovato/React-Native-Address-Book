@@ -1,22 +1,32 @@
-import { StyleSheet, Text, TextInput, ScrollView, View} from 'react-native';
-import {Component} from 'react';
+import { StyleSheet, View} from 'react-native';
+import {Singleton} from '../utils/Singleton';
+import {FileHandler} from '../utils/FileHandler';
 import { Button } from '@rneui/themed';
 
-const letters = [];
-for(let i = 65; i <= 90; i++)
-    letters.push(String.fromCharCode(i));
 
+export default function LetterIndex() {
 
-export default class LetterIndex extends Component {
+    let s = new Singleton();
+    let file = new FileHandler();
 
-    render(){
+    const letters = [];
+    for(let i = 65; i <= 90; i++)
+        letters.push(String.fromCharCode(i));
+        letters.push('#');
+
         return(
                 letters.map((letters) =>{
                 return(
                     <View key ={letters} style = {styles.buttonView}>
                         <Button
                             title = {letters}
-                            onPress = {() => {}}
+                            onPress = {() => {
+                                address = file.upload().then(data => s.setAddressList(data)).catch(err => console.log(err));
+                                if(letters !== '#') 
+                                    s.setAddressList(s.addressList.filter(obj => obj.name.includes(letters) | obj.surname.includes(letters)));
+                                const update = s.getAddressRender();
+                                update.update();
+                            }}
                             titleStyle = {styles.textStyle}
                             type = "clear"
                             color = '#fff'
@@ -25,7 +35,6 @@ export default class LetterIndex extends Component {
                     </View>
             )})
         );
-    }
 }
 
 const styles = StyleSheet.create({

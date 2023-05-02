@@ -8,7 +8,8 @@ export default class AddressLetter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addresses: []
+            addresses: [],
+            navigation: this.props.navigation,
         };
         this.file = new FileHandler();
         this.s = new Singleton();
@@ -33,6 +34,7 @@ export default class AddressLetter extends Component {
 
     render() {
         /* this.file.delete(); */
+        const { navigation } = this.props;
        if(this.s.isSearching === true && this.s.getSearch() !== '') {
         result = this.state.addresses.filter(obj => obj.name === this.s.getSearch() | obj.surname === this.s.getSearch())
        }
@@ -41,7 +43,7 @@ export default class AddressLetter extends Component {
         return (
             result.map(address => {
                 return (
-                    <TouchableHighlight key= {address.id} onPress={() => { Alert.alert("prova!") }}>
+                    <TouchableHighlight key= {address.id} onPress={() => {this.props.navigation.navigate('Modifica', address)}}>
                         <View style={styles.globalView}>
                             <Text style={styles.text}>{address.name} {address.surname}</Text>
                         </View>

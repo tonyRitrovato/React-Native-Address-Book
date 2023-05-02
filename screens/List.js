@@ -54,7 +54,7 @@ export default function List({navigation}) {
                     </View>
                     {/*component view */}
                     <View style = {styles.componentView}>
-                        <AddressLetter/>
+                        <AddressLetter navigation = {navigation}/>
                     </View>
                 </ScrollView>
                 {/*lista delle lettere per muoversi velocemente all' interno della rubbrica */}

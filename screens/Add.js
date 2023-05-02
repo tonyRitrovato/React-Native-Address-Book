@@ -6,7 +6,7 @@ import {FileHandler} from '../utils/FileHandler';
 import AddressBookitem from '../components/AddressBookItem';
 import { useState } from 'react';
 
-export default function Add() {
+export default function Add({navigation}) {
 
     let s = new Singleton();
     let file = new FileHandler();
@@ -52,6 +52,7 @@ export default function Add() {
                         file.save(s.getAddressList()).then(() => console.log("salvataggio avvenuto con successo")).catch((err) => console.log(err));
                         const update = s.getAddressRender();
                         update.update();
+                        navigation.navigate('Rubrica');
                     }}
                     titleStyle = {styles.textStyle}
                     type = "clear"
